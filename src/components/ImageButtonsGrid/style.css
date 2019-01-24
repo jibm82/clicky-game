@@ -1,0 +1,5 @@
+.image-buttons-grid {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
