@@ -13,10 +13,12 @@ class ImageButtonsGrid extends React.Component {
   }
 
   componentDidMount() {
-    this.imageSet();
+    this.loadNewImageSet();
   }
 
-  imageSet() {
+  loadNewImageSet() {
+    this.destroyImageSet();
+
     this.imageService
       .getRandomImageUrls()
       .then(imageUrls => {
@@ -34,12 +36,29 @@ class ImageButtonsGrid extends React.Component {
       .catch(err => console.log(err));
   }
 
+  destroyImageSet() {
+    this.setState({ images: [] });
+  }
+
   handleClick(i) {
+    const images = this.state.images.slice();
+    if (!images[i].clicked) {
+      images[i].clicked = true;
+      this.props.increaseScore();
+      this.setState({ images });
+      this.reorderImages();
+    } else {
+      this.loadNewImageSet();
+    }
+  }
+
+  reorderImages() {
     let images = this.state.images.slice();
-    images[i].clicked = true;
+
     images = images.sort(function() {
       return 0.5 - Math.random();
     });
+
     this.setState({ images });
   }
 
@@ -55,7 +74,7 @@ class ImageButtonsGrid extends React.Component {
 
   render() {
     return (
-      <div className="image-buttons-grid">
+      <div className="container image-buttons-grid">
         {this.state.images.map((image, index) => {
           return this.renderImageButton(index);
         })}
