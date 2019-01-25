@@ -1,24 +1,37 @@
 import React from "react";
 import "./style.css";
 import ImageButton from "../ImageButton";
+import ImageService from "../../services/ImageService";
 
 class ImageButtonsGrid extends React.Component {
   constructor(props) {
     super(props);
+    this.imageService = new ImageService();
     this.state = {
-      images: this.initialImages()
+      images: []
     };
   }
 
-  initialImages() {
-    const images = [];
-    for (let i = 1; i <= 16; i++) {
-      images.push({
-        clicked: false,
-        url: `https://via.placeholder.com/400x400.png?text=${i}`
-      });
-    }
-    return images;
+  componentDidMount() {
+    this.imageSet();
+  }
+
+  imageSet() {
+    this.imageService
+      .getRandomImageUrls()
+      .then(imageUrls => {
+        const images = [];
+
+        imageUrls.forEach(url => {
+          images.push({
+            clicked: false,
+            url: url
+          });
+        });
+
+        this.setState({ images });
+      })
+      .catch(err => console.log(err));
   }
 
   handleClick(i) {
