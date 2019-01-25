@@ -44,7 +44,16 @@ class ImageButtonsGrid extends React.Component {
     const images = this.state.images.slice();
     if (!images[i].clicked) {
       images[i].clicked = true;
-      this.props.increaseScore();
+      this.handleSuccessfulClick(images);
+    } else {
+      this.props.resetScore();
+      this.loadNewImageSet();
+    }
+  }
+
+  handleSuccessfulClick(images) {
+    this.props.increaseScore();
+    if (images.some(image => !image.clicked)) {
       this.setState({ images });
       this.reorderImages();
     } else {

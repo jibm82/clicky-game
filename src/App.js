@@ -18,14 +18,17 @@ class App extends Component {
     this.setState({ score, topScore });
   }
 
+  resetScore() {
+    this.setState({ score: 0 });
+  }
+
   render() {
     return (
       <div className="App">
         <Navbar score={this.state.score} topScore={this.state.topScore} />
         <ImageButtonsGrid
-          increaseScore={() => {
-            this.increaseScore();
-          }}
+          increaseScore={() => this.increaseScore()}
+          resetScore={() => this.resetScore()}
         />
       </div>
     );
