@@ -1,17 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Kanit:900");
 
 .spotlight {
-  text-align: right;
-  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
   background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
-  padding: 100px;
   color: #fff;
-  font-size: 10em !important;
+  padding: 50px 0px;
+  text-align: right;
 }
 
 .spotlight h1 {
-  font-size: 3rem !important;
-  margin-left: 50%;
-  margin-bottom: 0px;
   font-family: "Kanit", sans-serif;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+
+@media (min-width: 992px) {
+  .spotlight h1 {
+    font-size: 50px;
+    margin-left: 40%;
+    padding: 60px;
+  }
 }
