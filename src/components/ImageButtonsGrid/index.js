@@ -2,11 +2,13 @@ import React from "react";
 import "./style.css";
 import ImageButton from "../ImageButton";
 import ImageService from "../../services/ImageService";
+import Notifications from "../Notifications";
 
 class ImageButtonsGrid extends React.Component {
   constructor(props) {
     super(props);
     this.imageService = new ImageService();
+    this.notifications = React.createRef();
     this.state = {
       images: []
     };
@@ -37,7 +39,7 @@ class ImageButtonsGrid extends React.Component {
   }
 
   destroyImageSet() {
-    this.setState({ images: [] });
+    this.setState({ images: Array(16).fill({ url: "" }) });
   }
 
   handleClick(i) {
@@ -46,6 +48,7 @@ class ImageButtonsGrid extends React.Component {
       images[i].clicked = true;
       this.handleSuccessfulClick(images);
     } else {
+      this.notifications.current.error();
       this.props.resetScore();
       this.loadNewImageSet();
     }
@@ -56,8 +59,10 @@ class ImageButtonsGrid extends React.Component {
     if (images.some(image => !image.clicked)) {
       this.setState({ images });
       this.reorderImages();
+      this.notifications.current.success();
     } else {
       this.loadNewImageSet();
+      this.notifications.current.newImageSetLoaded();
     }
   }
 
@@ -83,11 +88,14 @@ class ImageButtonsGrid extends React.Component {
 
   render() {
     return (
-      <div className="container image-buttons-grid">
-        {this.state.images.map((image, index) => {
-          return this.renderImageButton(index);
-        })}
-      </div>
+      <>
+        <div className="container image-buttons-grid">
+          {this.state.images.map((image, index) => {
+            return this.renderImageButton(index);
+          })}
+        </div>
+        <Notifications ref={this.notifications} />
+      </>
     );
   }
 }

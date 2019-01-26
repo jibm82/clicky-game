@@ -8,7 +8,9 @@ function Navbar(props) {
         <div className="col-md-4">
           <a href="/">Clicky Game</a>
         </div>
-        <div className="col-md-4">Click an image to begin!</div>
+        <div className="col-md-4">
+          {props.score === 0 ? "Click an image to begin!" : ""}
+        </div>
         <div className="col-md-4">
           Score: {props.score} | Top Score: {props.topScore}
         </div>

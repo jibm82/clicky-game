@@ -1,5 +1,6 @@
 .image-buttons-grid {
   display: flex;
-  justify-content: start;
   flex-wrap: wrap;
+  justify-content: start;
+  margin: 50px auto 150px;
 }

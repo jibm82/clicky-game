@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import ImageButtonsGrid from "./components/ImageButtonsGrid";
 import Navbar from "./components/Navbar";
+import Spotlight from "./components/Spotlight";
 
 class App extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar score={this.state.score} topScore={this.state.topScore} />
+        <Spotlight />
         <ImageButtonsGrid
           increaseScore={() => this.increaseScore()}
           resetScore={() => this.resetScore()}
