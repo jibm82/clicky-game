@@ -12,5 +12,8 @@ User's must click on any given image just once. If they click once they will ear
 - After click once on every image of a given set, a new set will be loaded for the game to continue. This way the fun never stops.
 - The page keeps track of the higher score for the current session.
 
+## Demo
+![demo](https://github.com/jibm82/clicky-game/blob/master/public/assets/img/clicky-game.gif?raw=true)
+
 ## Play the game
 Game available at https://jibm82.github.io/clicky-game/
